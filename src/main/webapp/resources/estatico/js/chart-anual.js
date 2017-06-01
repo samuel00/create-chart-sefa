@@ -2,6 +2,7 @@ $(function () {
 	$.get('chart/quantidade/acesso', function (data) {
     	var dataSemAspas = data.replace(/\"/g, "");
     	var total_requisicoes = 0;
+    	console.log(dataSemAspas);
     	dataSemAspas = dataSemAspas.replace('acessos', '"acessos"');
     	
     	var json = $.parseJSON(dataSemAspas);

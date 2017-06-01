@@ -11,6 +11,7 @@ import java.util.TimeZone;
 import org.json.JSONObject;
 
 import sml.create.charts.modelo.HealthCheck;
+import sml.create.charts.modelo.Parametro;
 
 public class ConverterUtil {
 	
@@ -22,11 +23,19 @@ public class ConverterUtil {
 			listaTempo.add(Double.valueOf(String.valueOf(objeto[0])));
 			listaMetodo.add(String.valueOf(objeto[1]));
 		}
-		
 		json.put("metodos", listaMetodo);
 		json.put("tempo", listaTempo);
 		return json.toString();
+	}
+	
+
+
+	public static String ListaToJSON(String parametoEntrada, String parametoSaida, Parametro parametro) {
+		JSONObject json = new JSONObject();
 		
+		json.put(parametoEntrada, parametro.getEntrada().replaceAll("\n","").replaceAll("\\\\", ""));
+		json.put(parametoSaida, parametro.getSaida().replaceAll("\n","").replaceAll("\\\\", ""));
+		return json.toString();
 	}
 	
 	public static String ListaHealthToJSON(List<Object[]> lista){

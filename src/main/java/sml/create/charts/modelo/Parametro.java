@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name="Parametro")
 @Table(name="TAB_REQUISICAO_PARAMETRO", schema="MONITORAMENTO_SERVICE")
 @SequenceGenerator(name="PARAMETRO_SEQUENCE_GENERATOR", sequenceName="SEQ_TAB_REQUISICAO_PARAMETRO", allocationSize=1)
 public class Parametro implements Serializable{
@@ -22,19 +23,22 @@ public class Parametro implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PARAMETRO_SEQUENCE_GENERATOR")
 	@Column(name="tap_id")
-	private long id;
+	private Integer id;
 	
 	@OneToOne
 	@JoinColumn(name="tap_requisicao_id")
 	private Requisicao requisicao;
 	
 	@Column(name= "tap_header", nullable=false, updatable = false)
+	@Lob
 	private String header;
 	
 	@Column(name= "tap_entrada", nullable=false, updatable = false)
+	@Lob
 	private String entrada;
 	
 	@Column(name= "tap_saida", nullable=true, updatable = false)
+	@Lob
 	private String saida;
 	
 	@Column(name= "tap_metodo_invocado", nullable=false, updatable = false)
@@ -45,11 +49,11 @@ public class Parametro implements Serializable{
 	
 	public Parametro(){}
 
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

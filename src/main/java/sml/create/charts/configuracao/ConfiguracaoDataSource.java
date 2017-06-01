@@ -29,7 +29,7 @@ public class ConfiguracaoDataSource {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { "br.gov.pa.sefa.daeservice" });
+        sessionFactory.setPackagesToScan(new String[] { "sml.create.charts" });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
      }
