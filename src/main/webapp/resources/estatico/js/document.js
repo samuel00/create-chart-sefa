@@ -1,6 +1,8 @@
 $(function() {
 	
 	$("#select_metodos").change(function () {
+		$body = $("body");
+		$body.addClass("loading");
 		var metodo = $(this).find('option:selected').text();
 		$.get("../document/parametro/metodo",
 			{nomeMetodo : metodo},
@@ -14,7 +16,7 @@ $(function() {
 					var jsonPrettySaida = JSON.stringify(json.saida, undefined, 2);
 					$("#entrada").text(jsonPrettyEntrada);
 					$("#saida").text(jsonPrettySaida);
-		
+					$body.removeClass("loading");
 			});
         
     });	

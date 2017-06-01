@@ -15,6 +15,7 @@
 	<link href="<c:url value="/resources/css/matrix-style.css" />" rel="stylesheet">
 	<link href="<c:url value="/resources/css/matrix-media.css"/>" rel="stylesheet">
 	<link href="<c:url value="/resources/css/jquery.gritter.css"/>" rel="stylesheet">
+	<link href="<c:url value="/resources/css/comum.css"/>" rel="stylesheet">
 	<link href="<c:url value="/resources/font-awesome/css/font-awesome.css" />" rel="stylesheet" type='text/css'>
 	
 	<script src="<c:url value="/resources/js/jquery.js" />"></script>
@@ -125,6 +126,8 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal_aplicacao"></div>
 	<!--Footer-part-->
 	<div class="row-fluid">
 		<div id="footer" class="span12">
