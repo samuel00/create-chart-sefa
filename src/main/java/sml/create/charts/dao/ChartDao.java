@@ -42,4 +42,13 @@ public class ChartDao extends AbstractDao<Integer, Object>{
 		List<Object[]> itens = getSession().createSQLQuery(sql).list();
 		return itens;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> testeDao() {
+		String sql = "SELECT COUNT(TAR_IP_ORIGEM), TAR_IP_ORIGEM "
+				+ "FROM MONITORAMENTO_SERVICE.TAB_REQUISICAO "
+				+ "GROUP BY TAR_IP_ORIGEM";
+		List<Object[]> itens = getSession().createSQLQuery(sql).list();
+		return itens;
+	}
 }

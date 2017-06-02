@@ -7,15 +7,16 @@ $(function() {
 		$.get("../document/parametro/metodo",
 			{nomeMetodo : metodo},
 				function(data) {
-					var dataSemAspas = data.replace(/\\/g, '');
-					dataSemAspas = dataSemAspas.replace(/\"{/g, '{');
-					dataSemAspas = dataSemAspas.replace(/\}"/g, '}');
-					var json = $.parseJSON(dataSemAspas);
-		
-					var jsonPrettyEntrada = JSON.stringify(json.entrada, undefined, 2);
-					var jsonPrettySaida = JSON.stringify(json.saida, undefined, 2);
+					var dataSemBackSlash = data.replace(/\\/g, ''); //Remove barra invertida
+					dataSemBackSlash = dataSemBackSlash.replace(/\"{/g, '{'); //Remove aspas do "{
+					dataSemBackSlash = dataSemBackSlash.replace(/\}"/g, '}'); //Remove aspas do }"
+					var json = $.parseJSON(dataSemBackSlash);
+					var jsonPrettyEntrada = getJson(json.entrada);
+					var jsonPrettySaida = getJson(json.saida);
+					var jsonPrettySaida = getJson(json.saida);
 					$("#entrada").text(jsonPrettyEntrada);
 					$("#saida").text(jsonPrettySaida);
+					$("#cabecalho").text(json.cabecalho.replace(/\Nome do Header/g, '\nNome do Header').replace(/\Valor do Header/g, '\nValor do Header'));
 					$body.removeClass("loading");
 			});
         
@@ -28,5 +29,13 @@ $(function() {
 		        $('#select_metodos').append($('<option>').text(value).attr('value', value));
 		     });
 	});
+	
+	function getJson(json){
+		if(typeof json =='object'){
+			return JSON.stringify(json, undefined, 2);
+		}else{
+			return json;
+		}
+	}
 
 });

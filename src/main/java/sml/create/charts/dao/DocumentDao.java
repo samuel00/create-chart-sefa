@@ -9,11 +9,12 @@ import sml.create.charts.modelo.Parametro;
 @Repository
 public class DocumentDao extends AbstractDao<Integer, Object>{
 	
+	@SuppressWarnings("unchecked")
 	public Parametro getParametrosPorMetodo(String nomeMetodo) {
 		String sql = "SELECT p FROM  Parametro p "
 				+ " WHERE p.metodoInvocado = :nomeMetodo " 
 				+ " AND p.saida IS NOT NULL "
-				+ " ORDER BY p.id";
+				+ " ORDER BY p.id DESC";
 		List<Parametro> parametro=  getSession().createQuery(sql)
 				.setParameter("nomeMetodo", nomeMetodo)
 				.list();

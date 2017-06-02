@@ -155,10 +155,8 @@
 					</a></li> -->
 					<li class="bg_lg span3"><a href="paginas/charts.jsp"> <i class="icon-signal"></i> Gráficos	</a></li>
 					<li class="bg_ly"><a href="paginas/document.jsp"> <i class="icon-inbox"></i>Documentação</a></li>
-					  <!--<li class="bg_lo"><a href="tables.html"> <i
-							class="icon-th"></i> Tables
-					</a></li>
-					<li class="bg_ls"><a href="grid.html"> <i
+					  <li class="bg_lr"><a href="tables.html"> <i class="icon-info-sign"></i>Erros</a></li>
+					<!--<li class="bg_ls"><a href="grid.html"> <i
 							class="icon-fullscreen"></i> Full width
 					</a></li>
 					<li class="bg_lo span3"><a href="form-common.html"> <i
@@ -199,7 +197,7 @@
 										<small>Total de Requisições</small></li>
 									<li class="bg_lh"><i class="icon-ok"></i> <strong id="requisicoes_ok"></strong>
 										<small>Requisições Ok</small></li>
-									<li class="bg_lh"><i class="icon-remove"></i> <strong id="requisicoes_error"></strong>
+									<li class="bg_lh"><i class="icon-info-sign"></i> <strong id="requisicoes_error"></strong>
 										<small>Requisições com Erro</small></li>
 <!-- 									<li class="bg_lh"><i class="icon-tag"></i> <strong>9540</strong> -->
 <!-- 										<small>Total Orders</small></li> -->
@@ -219,8 +217,7 @@
 
 			<div class="row-fluid">
 				<div id="footer" class="span12">
-					2013 &copy; Matrix Admin. Brought to you by <a
-						href="http://themedesigner.in">Themedesigner.in</a>
+					2017 Desenvolvido por Samuel Santana
 				</div>
 			</div>
 

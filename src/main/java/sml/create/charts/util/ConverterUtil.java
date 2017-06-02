@@ -8,10 +8,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import sml.create.charts.modelo.HealthCheck;
 import sml.create.charts.modelo.Parametro;
+import sml.create.charts.modelo.RequisicaoErro;
 
 public class ConverterUtil {
 	
@@ -35,6 +36,7 @@ public class ConverterUtil {
 		
 		json.put(parametoEntrada, parametro.getEntrada().replaceAll("\n","").replaceAll("\\\\", ""));
 		json.put(parametoSaida, parametro.getSaida().replaceAll("\n","").replaceAll("\\\\", ""));
+		json.put("cabecalho", parametro.getHeader().replaceAll("\n",""));
 		return json.toString();
 	}
 	
@@ -64,6 +66,38 @@ public class ConverterUtil {
 			listaAcesso.add(String.valueOf("[" + date.getTime() + "," + Integer.valueOf(String.valueOf(objeto[0])) + "]"));
 		}
 		json.put("acessos", listaAcesso);
+		return json.toString();
+	}
+
+
+	public static String ListaToJSON(String erros, List<RequisicaoErro> lista) {
+		JSONObject json = new JSONObject();
+	    JSONArray jsonArray = new JSONArray();
+	    
+	    for(RequisicaoErro erro :lista){
+	    	JSONObject formDetailsJson = new JSONObject();
+	    	formDetailsJson.put("classe", erro.getClasse());
+	        formDetailsJson.put("metodo", erro.getMetodo());
+	        formDetailsJson.put("causa", erro.getMotivo());
+	        jsonArray.put(formDetailsJson);
+	    }
+
+		json.put(erros, jsonArray);
+		return json.toString();
+	}
+
+
+
+	public static String ListaToJSON(String keyIp, String keyQuantidade, List<Object[]> lista) {
+		JSONObject json = new JSONObject();
+		List<Double> listaQuantidade = new ArrayList<>();
+		List<String> listaip = new ArrayList<>();
+		for(Object [] objeto : lista){
+			listaQuantidade.add(Double.valueOf(String.valueOf(objeto[0])));
+			listaip.add(String.valueOf(objeto[1]));
+		}
+		json.put(keyIp, listaip);
+		json.put(keyQuantidade, listaQuantidade);
 		return json.toString();
 	}
 }

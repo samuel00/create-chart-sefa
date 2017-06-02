@@ -33,4 +33,9 @@ public class ChartService {
 	public List<Object[]> getHealthCheckRequisicaoMetodo() {
 		return this.testeDao.getHealthCheckRequisicaoMetodo();
 	}
+	
+	@Transactional
+	public List<Object[]> getclientes() {
+		return testeDao.testeDao();
+	}
 }
