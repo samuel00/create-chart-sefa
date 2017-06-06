@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>sml.create.chart</groupId>
-	<artifactId>create-charts</artifactId>
+	<groupId>br.gov.pa.sefa</groupId>
+	<artifactId>api-dashboard</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>create-charts</name>
+	<name>api-dashboard</name>
 
 	<properties>
 		<java-version>1.6</java-version>
@@ -17,6 +17,7 @@
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<org.springframework-jpa-version>1.8.0.RELEASE</org.springframework-jpa-version>
 	</properties>
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -187,8 +188,46 @@
 			<version>2.8.6</version>
 		</dependency>
 	</dependencies>
+	
+	
+	
+	<profiles>
+		<profile>
+			<id>desenvolvimento</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<build.profile.id>desenvolvimento</build.profile.id>
+			</properties>
+		</profile>
+		<profile>
+			<id>homologacao</id>
+			<properties>
+				<build.profile.id>homologacao</build.profile.id>
+			</properties>
+		</profile>
+		<profile>
+			<id>producao</id>
+			<properties>
+				<build.profile.id>producao</build.profile.id>
+			</properties>
+		</profile>
+	</profiles>
+	
 	<build>
-		<finalName>create-chart</finalName>
+		<filters>
+			<filter>profiles/${build.profile.id}.properties</filter>
+		</filters>
+		
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 
 			<plugin>
@@ -200,7 +239,7 @@
 					<server>tomcatserver</server>
 					<username>administrador</username>  
   					<password>admin</password>   
-					<path>/create-charts</path>
+					<path>/${project.artifactId}</path>
 				</configuration>
 			</plugin>
 
