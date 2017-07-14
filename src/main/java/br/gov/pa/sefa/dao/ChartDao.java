@@ -18,9 +18,9 @@ public class ChartDao extends AbstractDao<Integer, Object>{
 
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getQuantidadeAcesso() {
-		String sql = "SELECT COUNT(r.tar_data), TO_CHAR(r.tar_data,'dd-MM-yyyy') "
-				+ "FROM tab_requisicao r GROUP BY TO_CHAR(r.tar_data,'dd-MM-yyyy')  "
-				+ "ORDER BY TO_DATE(TO_CHAR(r.tar_data,'dd-MM-yyyy'))";
+		String sql = "SELECT  COUNT(1), TO_CHAR(R.TAR_DATA,'DD-MM-YYYY') "
+				+ "FROM TAB_REQUISICAO R GROUP BY TO_CHAR(R.TAR_DATA,'DD-MM-YYYY') "
+				+ "ORDER BY TO_DATE(TO_CHAR(R.TAR_DATA,'DD-MM-YYYY'),'DD-MM-YYYY')";
 		List<Object[]> itens = getSession().createSQLQuery(sql).list();
 		return itens;
 	}

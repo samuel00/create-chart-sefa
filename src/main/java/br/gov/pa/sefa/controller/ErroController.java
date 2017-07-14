@@ -23,7 +23,7 @@ public class ErroController {
 	@Autowired
 	private ErrorService errorService;
 
-	@RequestMapping(value = "/requisicao", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public @ResponseBody String getError(HttpServletRequest request) {
 		List<RequisicaoErro> erro = errorService.getError();
 		return ConverterUtil.ListaToJSON(ERROS, erro);

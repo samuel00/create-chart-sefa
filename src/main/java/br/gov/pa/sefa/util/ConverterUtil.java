@@ -76,9 +76,11 @@ public class ConverterUtil {
 	    
 	    for(RequisicaoErro erro :lista){
 	    	JSONObject formDetailsJson = new JSONObject();
+	    	formDetailsJson.put("id", erro.getId());
 	    	formDetailsJson.put("classe", erro.getClasse());
 	        formDetailsJson.put("metodo", erro.getMetodo());
 	        formDetailsJson.put("causa", erro.getMotivo());
+	        formDetailsJson.put("idRequisicao", erro.getRequisicao().getId());
 	        jsonArray.put(formDetailsJson);
 	    }
 
