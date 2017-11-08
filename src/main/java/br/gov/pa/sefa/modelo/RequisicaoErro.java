@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="TAB_REQUISICAO_ERRO", schema="MONITORAMENTO_SERVICE")
@@ -36,6 +38,13 @@ public class RequisicaoErro implements Serializable{
 	
 	@Column(name= "tae_metodo_ocorrencia", nullable=true, updatable = false)
 	private String metodo;
+	
+	@Column(name= "tae_stacktrace",  updatable = false)
+	@Lob
+	private String stacktrace;
+	
+	@Transient
+	private String data;
 
 	public Requisicao getRequisicao() {
 		return requisicao;
@@ -75,6 +84,22 @@ public class RequisicaoErro implements Serializable{
 
 	public void setMetodo(String metodo) {
 		this.metodo = metodo;
+	}
+
+	public String getStacktrace() {
+		return stacktrace;
+	}
+
+	public void setStacktrace(String stacktrace) {
+		this.stacktrace = stacktrace;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 
 }

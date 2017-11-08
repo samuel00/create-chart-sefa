@@ -1,5 +1,6 @@
 package br.gov.pa.sefa.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class ErrorService {
 		
 	@Transactional
 	public List<RequisicaoErro> getError() {
-		return this.errorDao.getError();
+		try {
+			return this.errorDao.getError();
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

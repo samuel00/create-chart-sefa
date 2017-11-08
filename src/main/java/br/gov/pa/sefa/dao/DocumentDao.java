@@ -13,11 +13,11 @@ public class DocumentDao extends AbstractDao<Integer, Object>{
 	public Parametro getParametrosPorMetodo(String nomeMetodo) {
 		String sql = "SELECT p FROM  Parametro p"
 				+ " WHERE p.metodoInvocado = :nomeMetodo" 
-				+ " AND p.id IN ( SELECT max(pm.id) FROM  Parametro pm)"
 				+ " AND p.saida IS NOT NULL "
 				+ " ORDER BY p.id DESC";
 		List<Parametro> parametro=  getSession().createQuery(sql)
 				.setParameter("nomeMetodo", nomeMetodo)
+				.setMaxResults(1)
 				.list();
 		return parametro.get(0);
 	}

@@ -7,16 +7,15 @@ $(function() {
 		$.get("../document/parametro/metodo",
 			{nomeMetodo : metodo},
 				function(data) {
+				console.log(data);
 					var dataSemBackSlash = data.replace(/\\/g, ''); //Remove barra invertida
-					dataSemBackSlash = dataSemBackSlash.replace(/\"{/g, '{'); //Remove aspas do "{
-					dataSemBackSlash = dataSemBackSlash.replace(/\}"/g, '}'); //Remove aspas do }"
+					console.log(dataSemBackSlash);
 					var json = $.parseJSON(dataSemBackSlash);
 					var jsonPrettyEntrada = getJson(json.entrada);
 					var jsonPrettySaida = getJson(json.saida);
-					var jsonPrettySaida = getJson(json.saida);
 					$("#entrada").text(jsonPrettyEntrada);
 					$("#saida").text(jsonPrettySaida);
-					$("#cabecalho").text(json.cabecalho.replace(/\Nome do Header/g, '\nNome do Header').replace(/\Valor do Header/g, '\nValor do Header'));
+					$("#cabecalho").text(json.header.replace(/\Nome do Header/g, '\nNome do Header').replace(/\Valor do Header/g, '\nValor do Header'));
 					$body.removeClass("loading");
 			});
         

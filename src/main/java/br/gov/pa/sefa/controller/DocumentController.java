@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import br.gov.pa.sefa.modelo.Parametro;
 import br.gov.pa.sefa.service.DocumentService;
 import br.gov.pa.sefa.util.ConverterUtil;
@@ -24,8 +26,9 @@ public class DocumentController {
 	private DocumentService documentService;
 
 	@RequestMapping(value = "/parametro/metodo", method = RequestMethod.GET)
-	public @ResponseBody String parametrosPorMetodo(@RequestParam(value = "nomeMetodo") String nomeMetodo, HttpServletRequest request) {
+	public @ResponseBody String parametrosPorMetodo(@RequestParam(value = "nomeMetodo") String nomeMetodo, HttpServletRequest request) throws JsonProcessingException {
 		Parametro parametro = documentService.getParametrosPorMetodo(nomeMetodo);
+		
 		return ConverterUtil.ListaToJSON(PARAMETO_ENTRADA, PARAMETO_SAIDA,parametro);
 	}
 }

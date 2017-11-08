@@ -24,7 +24,10 @@
 <%-- 	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script> --%>
 <%-- 	<script src="<c:url value="/resources/js/jquery.uniform.js" />"></script> --%>
 <%-- 	<script src="<c:url value="/resources/js/select2.min.js" />"></script> --%>
-	<script src="<c:url value="/resources/js/jquery.dataTables.min.js" />"></script>
+<%-- 	<script src="<c:url value="/resources/js/jquery.dataTables.min.js" />"></script> --%>
+		
+	<script src="<c:url value="/resources/js/datatable/jquery.dataTables.js" />"></script>
+	<script src="<c:url value="/resources/js/datatable/dataTables.rowReorder.js" />"></script>
 <%-- 	<script src="<c:url value="/resources/js/matrix.js" />"></script> --%>
 <%-- 	<script src="<c:url value="/resources/js/matrix.tables.js" />"></script> --%>
 	<script src="<c:url value="/resources/js/error.js" />"></script>
@@ -66,7 +69,7 @@
             			<table class="table table-bordered data-table" id="tabelaDeErros">
               				<thead>
                 				<tr>
-                  					<th>ID</th>
+                					<th>Data</th>
                   					<th>Classe</th>
                   					<th>Método</th>
                   					<th>Causa</th>

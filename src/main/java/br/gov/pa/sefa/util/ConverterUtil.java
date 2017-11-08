@@ -4,17 +4,28 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import br.gov.pa.sefa.modelo.DocumentoJSON;
 import br.gov.pa.sefa.modelo.Parametro;
 import br.gov.pa.sefa.modelo.RequisicaoErro;
 
 public class ConverterUtil {
+	
+	public static DateFormat OUT_DATETIME_FORMAT = new SimpleDateFormat("d/M/yyyy H:mm:ss");
+	public static SimpleDateFormat OUT_CALENDAR_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", new Locale("pt", "BR"));
 	
 	public static String ListaToJSON(List<Object[]> lista){
 		JSONObject json = new JSONObject();
@@ -24,6 +35,7 @@ public class ConverterUtil {
 			listaTempo.add(Double.valueOf(String.valueOf(objeto[0])));
 			listaMetodo.add(String.valueOf(objeto[1]));
 		}
+		
 		json.put("metodos", listaMetodo);
 		json.put("tempo", listaTempo);
 		return json.toString();
@@ -31,13 +43,12 @@ public class ConverterUtil {
 	
 
 
-	public static String ListaToJSON(String parametoEntrada, String parametoSaida, Parametro parametro) {
-		JSONObject json = new JSONObject();
-		
-		json.put(parametoEntrada, parametro.getEntrada().replaceAll("\n","").replaceAll("\\\\", ""));
-		json.put(parametoSaida, parametro.getSaida().replaceAll("\n","").replaceAll("\\\\", ""));
-		json.put("cabecalho", parametro.getHeader().replaceAll("\n",""));
-		return json.toString();
+	public static String ListaToJSON(String parametoEntrada, String parametoSaida, Parametro parametro) throws JsonProcessingException{
+		DocumentoJSON documentoJSON = new DocumentoJSON(parametro);
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String jsonString = mapper.writeValueAsString(documentoJSON);
+        return jsonString;
 	}
 	
 	public static String ListaHealthToJSON(List<Object[]> lista){
@@ -70,17 +81,18 @@ public class ConverterUtil {
 	}
 
 
-	public static String ListaToJSON(String erros, List<RequisicaoErro> lista) {
+	public static String ListaToJSON(String erros, List<RequisicaoErro> listaErros) {
 		JSONObject json = new JSONObject();
 	    JSONArray jsonArray = new JSONArray();
 	    
-	    for(RequisicaoErro erro :lista){
+	    for(RequisicaoErro erro :listaErros){
 	    	JSONObject formDetailsJson = new JSONObject();
 	    	formDetailsJson.put("id", erro.getId());
 	    	formDetailsJson.put("classe", erro.getClasse());
 	        formDetailsJson.put("metodo", erro.getMetodo());
 	        formDetailsJson.put("causa", erro.getMotivo());
 	        formDetailsJson.put("idRequisicao", erro.getRequisicao().getId());
+	        formDetailsJson.put("data", erro.getData());
 	        jsonArray.put(formDetailsJson);
 	    }
 
@@ -101,5 +113,11 @@ public class ConverterUtil {
 		json.put(keyIp, listaip);
 		json.put(keyQuantidade, listaQuantidade);
 		return json.toString();
+	}
+	
+	public static String teste(String teste) throws ParseException{
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(OUT_CALENDAR_FORMAT.parse(teste));
+		return OUT_DATETIME_FORMAT.format(cal.getTime());
 	}
 }
